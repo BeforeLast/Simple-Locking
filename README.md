@@ -16,3 +16,6 @@ note: to create log, change variable WRITE_LOG to True
 4. Every transaction need to have at least a commit at the end of the transaction
 
 note: for example, see file Schedule1.csv inside folder test
+
+# Author
+Christopher Chandrasaputra - 13519074
