@@ -1,8 +1,12 @@
+from os import name
 from classes.Schedule import Schedule
 from classes.Manager import Manager
 
-s = Schedule('./test/Schedule2.csv')
-m = Manager(s)
+if __name__ == '__main__':
+    FILE_DIRECTORY = './test/Schedule3.csv'
+    WRITE_LOG = False
 
-# print(m.lock)
-m.manage_schedule()
+    s = Schedule(FILE_DIRECTORY)
+    m = Manager(s)
+
+    m.manage_schedule(log=WRITE_LOG)

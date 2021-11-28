@@ -1,3 +1,4 @@
+import sys
 from typing import Dict
 from classes.Constants import Constants
 from classes.Operation import Operation
@@ -16,7 +17,10 @@ class Manager:
         for accessed_data in schedule.get_accessed_data():
             self.lock[accessed_data] = Lock(accessed_data,Constants.EXCLUSIVE)
     
-    def manage_schedule(self):
+    def manage_schedule(self,log:bool=False):
+        if log:
+            log = open('log.txt','w')
+            sys.stdout = log
         copy_schedule:Schedule = self.schedule.copy()
         self.print_splitter()
         while copy_schedule or self.queue:
