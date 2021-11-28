@@ -26,6 +26,12 @@ class Lock:
     def get_current_access(self):
         """Get transaction that hold current access to data"""
         return self.current_access
+    
+    def toString(self):
+        if self.current_access:
+            return f'Transaction {self.current_access} currently holding the {self.type} lock for {self.data}'
+        else:
+            return f'No transaction currently holding the {self.type} lock for {self.data}'
 
     # def print(self):
     #     if not self.current_access:

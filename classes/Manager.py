@@ -10,7 +10,6 @@ class Manager:
     executed_operation:List[Operation] = []
     lock:Dict[str,Lock] = {}
     queue:List[Operation] = []
-    wait_graph:List[List[str]] = []
 
     def __init__(self,schedule:Schedule) -> None:
         self.schedule = schedule.get_schedule()
@@ -21,7 +20,34 @@ class Manager:
         copy_schedule:Schedule = self.schedule.copy()
         self.print_splitter()
         while copy_schedule or self.queue:
-            if self.queue and self.is_runnable(self.queue[0],True):
+            if not copy_schedule and self.queue and not self.is_runnable(self.queue[0],True):
+                # DEADLOCK DETECTED
+                # Schedule empty and cannot execute first operation in queue
+                # Rollback Process
+                transaction_name = self.queue[0].get_transaction()
+                print('DEADLOCK DETECTED')
+                print(f'ROLLBACK ON TRANSACTION {transaction_name}')
+                temp_rollback_schedule:List[Operation] = []
+                temp_schedule:List[Operation] = []
+                
+                for op in self.executed_operation:
+                    if op.get_transaction() == transaction_name:
+                        temp_rollback_schedule.append(op)
+                    else:
+                        temp_schedule.append(op)
+                self.executed_operation = temp_schedule[:]
+                temp_schedule:List[Operation] = []
+                for op in self.queue:
+                    if op.get_transaction() == transaction_name:
+                        temp_rollback_schedule.append(op)
+                    else:
+                        temp_schedule.append(op)
+                for op in temp_rollback_schedule:
+                    for accessed_data in self.lock:
+                        if self.lock[accessed_data].get_current_access() == op.get_transaction():
+                            self.lock[accessed_data].drop_current_access()
+                self.queue = temp_schedule[:] + temp_rollback_schedule
+            elif self.queue and self.is_runnable(self.queue[0],True):
                 # EXECUTE QUEUE
                 operation = self.queue[0]
                 self.queue = self.queue[1:]
@@ -69,10 +95,8 @@ class Manager:
                     # if operation.get_target():
                     #     pass
                     # pass
-            self.print_splitter()
-            
-    # def check_deadlock(self):
-    #     pass
+            self.print_splitter() 
+        print("EXECUTED OPERATION: " + ', '.join([i.toString() for i in self.executed_operation]))
 
     
     def is_runnable(self,operation:Operation,dequeue:bool=False):
