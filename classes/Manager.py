@@ -58,6 +58,7 @@ class Manager:
                 # COMMIT AND UNLOCK
                 if operation.get_op() == Constants.COMMIT:
                     # Do Commit -> Unlock
+                    operation.print()
                     for accessed_data in self.lock:
                         if self.lock[accessed_data].get_current_access() == operation.get_transaction():
                             self.lock[accessed_data].drop_current_access()
@@ -65,7 +66,9 @@ class Manager:
                 elif not self.lock[operation.get_target()].get_current_access():
                     # Lock is empty -> Lock
                     self.lock[operation.get_target()].set_current_access(operation.get_transaction())
-                operation.print()
+                    operation.print()
+                elif self.lock[operation.get_target()].get_current_access() == operation.get_transaction():
+                    operation.print()
                 print('REMAINING ',end='')
                 self.print_queue()
                 self.executed_operation.append(operation)

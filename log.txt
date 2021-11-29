@@ -1,230 +1,95 @@
 ================================
-GRANT EXCLUSIVE LOCK ON B TO T1
-T1 WRITE B
-================================
 GRANT EXCLUSIVE LOCK ON A TO T1
-T1 READ A
+T1 WRITE A
 ================================
-GRANT EXCLUSIVE LOCK ON C TO T2
-T2 WRITE C
+GRANT EXCLUSIVE LOCK ON B TO T2
+T2 WRITE B
 ================================
-GRANT EXCLUSIVE LOCK ON D TO T4
-T4 WRITE D
+GRANT EXCLUSIVE LOCK ON C TO T3
+T3 WRITE C
 ================================
-GRANT EXCLUSIVE LOCK ON X TO T8
-T8 WRITE X
+QUEUE: R_T3(A)
 ================================
-GRANT EXCLUSIVE LOCK ON Z TO T9
-T9 READ Z
+QUEUE: R_T3(A), R_T2(A)
 ================================
-GRANT EXCLUSIVE LOCK ON N TO T6
-T6 READ N
+QUEUE: R_T3(A), R_T2(A), W_T3(A)
 ================================
-QUEUE: W_T5(A)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C)
 ================================
-QUEUE: W_T5(A), W_T5(Z)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B)
 ================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B)
 ================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B), R_T1(A)
 ================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B), R_T1(A), R_T2(C)
 ================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B), R_T1(A), R_T2(C), C_T1
 ================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A)
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B), R_T1(A), R_T2(C), C_T1, C_T3
 ================================
-T4 READ D
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N)
-================================
-T1 READ A
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B)
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5
-================================
-COMMIT T6
-UNLOCK N
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5, C_T10
-================================
-QUEUE: W_T5(A), W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5, C_T10, C_T7
-================================
-COMMIT T1
-UNLOCK B
-UNLOCK A
-================================
-GRANT EXCLUSIVE LOCK ON A TO T5
-T5 WRITE A
-REMAINING QUEUE: W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5, C_T10, C_T7
-================================
-QUEUE: W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5, C_T10, C_T7, C_T3
-================================
-COMMIT T4
-UNLOCK D
-================================
-QUEUE: W_T5(Z), R_T9(A), R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), W_T5(B), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T5, C_T10, C_T7, C_T3, C_T2
+QUEUE: R_T3(A), R_T2(A), W_T3(A), W_T2(C), W_T1(B), R_T3(B), R_T1(A), R_T2(C), C_T1, C_T3, C_T2
 ================================
 DEADLOCK DETECTED
-ROLLBACK ON TRANSACTION T5
-UNLOCK A
-================================
-GRANT EXCLUSIVE LOCK ON A TO T9
-T9 READ A
-REMAINING QUEUE: R_T3(B), R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T10, C_T7, C_T3, C_T2, W_T5(A), W_T5(Z), W_T5(B), C_T5
-================================
-GRANT EXCLUSIVE LOCK ON B TO T3
-T3 READ B
-REMAINING QUEUE: R_T10(C), W_T10(Z), R_T2(A), R_T7(X), R_T7(Y), W_T7(Z), R_T3(N), W_T8(A), W_T9(B), W_T8(Y), R_T10(B), C_T9, C_T8, C_T10, C_T7, C_T3, C_T2, W_T5(A), W_T5(Z), W_T5(B), C_T5
-================================
-DEADLOCK DETECTED
-ROLLBACK ON TRANSACTION T10
+ROLLBACK ON TRANSACTION T3
+UNLOCK C
 ================================
 DEADLOCK DETECTED
 ROLLBACK ON TRANSACTION T2
-UNLOCK C
-================================
-DEADLOCK DETECTED
-ROLLBACK ON TRANSACTION T7
-================================
-GRANT EXCLUSIVE LOCK ON N TO T3
-T3 READ N
-REMAINING QUEUE: W_T8(A), W_T9(B), W_T8(Y), C_T9, C_T8, C_T3, W_T5(A), W_T5(Z), W_T5(B), C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7
-================================
-DEADLOCK DETECTED
-ROLLBACK ON TRANSACTION T8
-UNLOCK X
-================================
-DEADLOCK DETECTED
-ROLLBACK ON TRANSACTION T9
-UNLOCK Z
-UNLOCK A
-================================
 UNLOCK B
-UNLOCK N
+================================
+GRANT EXCLUSIVE LOCK ON B TO T1
+T1 WRITE B
+REMAINING QUEUE: R_T1(A), C_T1, W_T3(C), R_T3(A), W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+T1 READ A
+REMAINING QUEUE: C_T1, W_T3(C), R_T3(A), W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+COMMIT T1
+UNLOCK A
+UNLOCK B
+REMAINING QUEUE: W_T3(C), R_T3(A), W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+GRANT EXCLUSIVE LOCK ON C TO T3
+T3 WRITE C
+REMAINING QUEUE: R_T3(A), W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+GRANT EXCLUSIVE LOCK ON A TO T3
+T3 READ A
+REMAINING QUEUE: W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+T3 WRITE A
+REMAINING QUEUE: R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
+GRANT EXCLUSIVE LOCK ON B TO T3
+T3 READ B
+REMAINING QUEUE: C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
+================================
 COMMIT T3
-REMAINING QUEUE: W_T5(A), W_T5(Z), W_T5(B), C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON A TO T5
-T5 WRITE A
-REMAINING QUEUE: W_T5(Z), W_T5(B), C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Z TO T5
-T5 WRITE Z
-REMAINING QUEUE: W_T5(B), C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON B TO T5
-T5 WRITE B
-REMAINING QUEUE: C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-UNLOCK Z
-UNLOCK B
 UNLOCK A
-COMMIT T5
-REMAINING QUEUE: R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON C TO T10
-T10 READ C
-REMAINING QUEUE: W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Z TO T10
-T10 WRITE Z
-REMAINING QUEUE: R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON B TO T10
-T10 READ B
-REMAINING QUEUE: C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-UNLOCK Z
 UNLOCK B
 UNLOCK C
-COMMIT T10
-REMAINING QUEUE: W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
+REMAINING QUEUE: W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
 ================================
-GRANT EXCLUSIVE LOCK ON C TO T2
-T2 WRITE C
-REMAINING QUEUE: R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
+GRANT EXCLUSIVE LOCK ON B TO T2
+T2 WRITE B
+REMAINING QUEUE: R_T2(A), W_T2(C), R_T2(C), C_T2
 ================================
 GRANT EXCLUSIVE LOCK ON A TO T2
 T2 READ A
-REMAINING QUEUE: C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
+REMAINING QUEUE: W_T2(C), R_T2(C), C_T2
 ================================
-UNLOCK A
-UNLOCK C
+GRANT EXCLUSIVE LOCK ON C TO T2
+T2 WRITE C
+REMAINING QUEUE: R_T2(C), C_T2
+================================
+T2 READ C
+REMAINING QUEUE: C_T2
+================================
 COMMIT T2
-REMAINING QUEUE: R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON X TO T7
-T7 READ X
-REMAINING QUEUE: R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Y TO T7
-T7 READ Y
-REMAINING QUEUE: W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Z TO T7
-T7 WRITE Z
-REMAINING QUEUE: C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-UNLOCK X
-UNLOCK Z
-UNLOCK Y
-COMMIT T7
-REMAINING QUEUE: W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON X TO T8
-T8 WRITE X
-REMAINING QUEUE: W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON A TO T8
-T8 WRITE A
-REMAINING QUEUE: W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Y TO T8
-T8 WRITE Y
-REMAINING QUEUE: C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-UNLOCK X
-UNLOCK Y
 UNLOCK A
-COMMIT T8
-REMAINING QUEUE: R_T9(Z), R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON Z TO T9
-T9 READ Z
-REMAINING QUEUE: R_T9(A), W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON A TO T9
-T9 READ A
-REMAINING QUEUE: W_T9(B), C_T9
-================================
-GRANT EXCLUSIVE LOCK ON B TO T9
-T9 WRITE B
-REMAINING QUEUE: C_T9
-================================
-UNLOCK Z
 UNLOCK B
-UNLOCK A
-COMMIT T9
+UNLOCK C
 REMAINING QUEUE: Nothing
 ================================
-EXECUTED OPERATION: W_T1(B), R_T1(A), W_T4(D), R_T6(N), R_T4(D), R_T1(A), C_T6, C_T1, C_T4, R_T3(B), R_T3(N), C_T3, W_T5(A), W_T5(Z), W_T5(B), C_T5, R_T10(C), W_T10(Z), R_T10(B), C_T10, W_T2(C), R_T2(A), C_T2, R_T7(X), R_T7(Y), W_T7(Z), C_T7, W_T8(X), W_T8(A), W_T8(Y), C_T8, R_T9(Z), R_T9(A), W_T9(B), C_T9
+EXECUTED OPERATION: W_T1(A), W_T1(B), R_T1(A), C_T1, W_T3(C), R_T3(A), W_T3(A), R_T3(B), C_T3, W_T2(B), R_T2(A), W_T2(C), R_T2(C), C_T2
